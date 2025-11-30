@@ -83,9 +83,9 @@ A high-stakes spy thriller web game where players travel the globe, solve increa
 5. Open http://localhost:3000
 
 ### Deploying to Cloud Run
-- Set your Gemini key as a build-time substitution so Vite can embed it: `gcloud builds submit --config cloudbuild.yaml --substitutions=_SERVICE=nathansgame,_REGION=us-central1,_GEMINI_API_KEY=<your_key>`.
-- The substitution maps to Docker build arg `GEMINI_API_KEY`, which is forwarded to Vite as `VITE_GEMINI_API_KEY`.
-- The key ships to the client bundle (Gemini client-side calls require it), so do not use a sensitive project key.
+- Build and deploy: `gcloud builds submit --config cloudbuild.yaml --substitutions=_SERVICE=nathansgame,_REGION=us-central1`.
+- Set the runtime env var on the Cloud Run service (once): `gcloud run services update nathansgame --region us-central1 --set-env-vars GEMINI_API_KEY=<your_key>`.
+- The container injects `GEMINI_API_KEY` into the HTML at runtime as `window.__ENV.VITE_GEMINI_API_KEY`, so no build-time substitution is required.
 
 ## 🎯 How to Play
 

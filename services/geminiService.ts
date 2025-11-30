@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
-import { 
-  MissionData, 
-  WORLD_LOCATIONS, 
+import {
+  MissionData,
+  WORLD_LOCATIONS,
   VILLAIN_ORGANIZATIONS,
   WirePuzzleData,
   KeypadPuzzleData,
@@ -10,10 +10,20 @@ import {
   MazePuzzleData
 } from "../types";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+declare global {
+  interface Window {
+    __ENV?: {
+      VITE_GEMINI_API_KEY?: string;
+    };
+  }
+}
+
+const apiKey =
+  import.meta.env.VITE_GEMINI_API_KEY ||
+  (typeof window !== "undefined" ? window.__ENV?.VITE_GEMINI_API_KEY : undefined);
 
 if (!apiKey) {
-  throw new Error("Missing VITE_GEMINI_API_KEY. Set it in your environment at build time (GEMINI_API_KEY -> build arg -> VITE_GEMINI_API_KEY).");
+  throw new Error("Missing VITE_GEMINI_API_KEY. Set GEMINI_API_KEY in the server environment or VITE_GEMINI_API_KEY at build time.");
 }
 
 const ai = new GoogleGenAI({ apiKey });
