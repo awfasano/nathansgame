@@ -10,7 +10,13 @@ import {
   MazePuzzleData
 } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  throw new Error("Missing VITE_GEMINI_API_KEY. Set it in your environment at build time.");
+}
+
+const ai = new GoogleGenAI({ apiKey });
 
 const missionSchema: Schema = {
   type: Type.OBJECT,

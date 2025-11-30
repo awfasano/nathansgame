@@ -70,9 +70,9 @@ A high-stakes spy thriller web game where players travel the globe, solve increa
    npm install
    ```
 
-3. Create a `.env.local` file and add your API key:
+3. Create a `.env.local` file and add your API key (Vite exposes any `VITE_` prefixed variable to the client):
    ```
-   GEMINI_API_KEY=your_api_key_here
+   VITE_GEMINI_API_KEY=your_api_key_here
    ```
 
 4. Start the development server:
@@ -81,6 +81,10 @@ A high-stakes spy thriller web game where players travel the globe, solve increa
    ```
 
 5. Open http://localhost:3000
+
+### Deploying to Cloud Run
+- Set your Gemini key as a build-time substitution so Vite can embed it: `gcloud builds submit --config cloudbuild.yaml --substitutions=_SERVICE=nathansgame,_REGION=us-central1,_GEMINI_API_KEY=<your_key>`.
+- The key ships to the client bundle (Gemini client-side calls require it), so do not use a sensitive project key.
 
 ## 🎯 How to Play
 
