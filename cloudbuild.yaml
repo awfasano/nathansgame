@@ -11,7 +11,7 @@ steps:
         "-t",
         "gcr.io/$PROJECT_ID/$_SERVICE:$COMMIT_SHA",
         "--build-arg",
-        "VITE_GEMINI_API_KEY=${_GEMINI_API_KEY}",
+        "GEMINI_API_KEY=${_GEMINI_API_KEY}",
         ".",
       ]
 

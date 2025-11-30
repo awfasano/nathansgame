@@ -13,7 +13,7 @@ import {
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
 if (!apiKey) {
-  throw new Error("Missing VITE_GEMINI_API_KEY. Set it in your environment at build time.");
+  throw new Error("Missing VITE_GEMINI_API_KEY. Set it in your environment at build time (GEMINI_API_KEY -> build arg -> VITE_GEMINI_API_KEY).");
 }
 
 const ai = new GoogleGenAI({ apiKey });
